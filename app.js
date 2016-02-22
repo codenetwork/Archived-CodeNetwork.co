@@ -4,6 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('./config');
+
+// Import, Configure and Initialize Mongoose.
+var mongoose = require('mongoose');
+require('./models/');
+mongoose.connect(config.MongoURI, function(error) {
+  (error) ? console.log('Database Connection Error: ' + error) : console.log('Successfully Connected to MongoLab!');
+});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
