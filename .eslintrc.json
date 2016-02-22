@@ -1,0 +1,16 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "strict": 0,
+    "no-underscore-dangle": 0,
+    "quotes": [2, "single"],
+    "no-shadow": 2,
+    "one-var": 0,
+    "comma-dangle": [2,"never"],
+    "func-names":0
+  }
+}
