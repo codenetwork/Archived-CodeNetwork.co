@@ -1,11 +1,151 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+  <title>Code Network</title>
+
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css"/>
+
+  <!-- Javascripts -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script src="/javascripts/custom.js"></script>
+
+  <!--Let browser know the website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+
+<main class="center">
+  <!-- Code Network Logo-->
+  <img class="responsive-img" src="/images/final-grey-bg-large.png" width="15%"><br>
+
+  <!--Membership Registration Form-->
+  <div class="container registration-form blue-grey lighten-5">
+    <form class="col s12" id="membership-form" method="post">
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="name_first" type="text" class="validate">
+          <label for="name_first">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="name_last" type="text" class="validate">
+          <label for="name_last">Last Name</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="text" pattern="(n|0)?[0-9]{7}" id="student_number" class="validate"/>
+          <label for="student_number">Student Number</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <select id="payment_method" required>
+            <option disabled value="payment_none" selected>How would you like to pay for membership?</option>
+            <option value="payment_card">Card - $10</option>
+            <option value="payment_cash">Cash - $10</option>
+            <option value="payment_code">Code - Solve an Issue on a CodeNetwork project</option>
+            <option value="payment_none">I wouldn't.</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="payment-errors"></div>
+
+      <div id="card_details">
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="number" id="card_number" data-stripe="number"/>
+            <label for="card_number">Card Number</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s4">
+            <input type="number" id="card_month" data-stripe="exp-month">
+            <label for="card_month">Month</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="number" id="card_year" data-stripe="exp-year">
+            <label for="card_year">Year</label>
+          </div>
+          <div class="input-field col s4">
+            <input type="number" id="card_cvc" data-stripe="cvc">
+            <label for="card_cvc">CVC</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn waves-effect waves-light" type="submit">{ Sign Me Up }</button>
+      </div>
+
+    </form>
+  </div>
+
+</main>
+
+<footer class="page-footer light-green darken-2" style="line-height: 0.5">
+  <div class="footer-copyright grey darken-4">
+    <div class="container center grey-text lighten-3">
+      <span>Made with <i class="fa fa-heart"></i> by Code Network</span>
+    </div>
+  </div>
+</footer>
+<script type="text/javascript">
+  // Stripe API Publishable Key
+  Stripe.setPublishableKey('pk_test_uFzevT2PrerMcNaQq40rtxFo');
+
+  // Stripe Response Handler - Used
+  var stripeResponseHandler = function(status, response) {
+    var $form = $('#membership-form');
+    if (response.error) {
+      // Show the errors on the form
+      $form.find('.payment-errors').text(response.error.message);
+      $form.find('button').prop('disabled', false);
+    } else {
+      // token contains id, last4, and card type
+      var token = response.id;
+      // Insert the token into the form so it gets submitted to the server and re-submit
+      $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+      // Submit the form.
+      //$form.get(0).submit();
+    }
+  };
+
+  $('#membership-form').submit(function() {
+    var $form = $(this);
+    // Disable the submit button to prevent repeated clicks
+    $form.find('button').prop('disabled', true);
+    Stripe.card.createToken($form, stripeResponseHandler);
+
+    $.post("register.php", { data: $('#membership-form').serialize() }, function(data, status){
+      alert("Data: " + data + "\nStatus: " + status);
+      console.log(data);
+    });
+
+
+    // Prevent the form from submitting with the default action
+    return false;
+  });
+</script>
+</body>
 </html>
