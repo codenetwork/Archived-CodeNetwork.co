@@ -9,7 +9,7 @@ var config = require('./config');
 // Import, Configure and Initialize Mongoose.
 var mongoose = require('mongoose');
 require('./models/');
-mongoose.connect(config.MongoURI, function(error) {
+mongoose.connect(config.database.mongo.uri, function(error) {
   (error) ? console.log('Database Connection Error: ' + error) : console.log('Successfully Connected to MongoLab!');
 });
 
@@ -18,7 +18,10 @@ var users = require('./routes/users');
 
 var app = express();
 
-// uncomment after placing your favicon in /public
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -38,26 +41,18 @@ app.use(function(req, res, next) {
 
 // error handlers
 
-// development error handler
-// will print stacktrace
+// development error handler - will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    res.render('error', { message: err.message, error: err });
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
+// production error handler - no stacktrace leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  res.render('error', { message: err.message, error: {} });
 });
 
 module.exports = app;
