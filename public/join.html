@@ -1,73 +1,58 @@
-<!--Membership Registration Form-->
-<div class="center container registration-form blue-grey lighten-5">
-  <h3>Join Code Network</h3>
-  <form class="col s12" id="membership-form" method="post">
+<md-content layout-padding>
+  <form name="registration">
 
-    <div class="row">
-      <div class="input-field col s6">
-        <input id="name_first" type="text" class="validate">
-        <label for="name_first">First Name</label>
-      </div>
-      <div class="input-field col s6">
-        <input id="name_last" type="text" class="validate">
-        <label for="name_last">Last Name</label>
-      </div>
+    <!-- First and Last Name -->
+    <div layout="row">
+      <!-- First Name -->
+      <md-input-container class="md-block">
+        <label>First Name</label>
+        <input required md-no-asterisk name="nameFirst" ng-model="register.name.first">
+        <div ng-messages="registration.nameFirst.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <!-- Last Name -->
+      <md-input-container class="md-block">
+        <label>Last Name</label>
+        <input required md-no-asterisk name="nameLast" ng-model="register.name.last">
+        <div ng-messages="registration.nameLast.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
     </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <input id="email" type="email" class="validate">
-        <label for="email">Email</label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" pattern="(n|0)?[0-9]{7}" id="student_number" class="validate"/>
-        <label for="student_number">Student Number</label>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <select id="payment_method" required material-select watch>
-          <option disabled value="payment_none" selected>Membership is $10 and optional - how would you like to pay?</option>
-          <option value="payment_card">Card</option>
-          <option value="payment_cash">Cash</option>
-          <option value="payment_code">Code</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="payment-errors"></div>
-
-    <div id="card_details">
-      <div class="row">
-        <div class="input-field col s12">
-          <input type="number" id="card_number" data-stripe="number"/>
-          <label for="card_number">Card Number</label>
+    <!-- Email Address -->
+    <md-input-container class="md-block">
+      <label>Email</label>
+      <input required type="email" name="email" ng-model="register.email" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+      <div ng-messages="registration.email.$error" role="alert">
+        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+          Your email must be between 10 and 100 characters long and look like an e-mail address.
         </div>
       </div>
+    </md-input-container>
 
-      <div class="row">
-        <div class="input-field col s4">
-          <input type="number" id="card_month" data-stripe="exp-month">
-          <label for="card_month">Month</label>
-        </div>
-        <div class="input-field col s4">
-          <input type="number" id="card_year" data-stripe="exp-year">
-          <label for="card_year">Year</label>
-        </div>
-        <div class="input-field col s4">
-          <input type="number" id="card_cvc" data-stripe="cvc">
-          <label for="card_cvc">CVC</label>
+    <!-- Student ID -->
+    <md-input-container class="md-block">
+      <label>Student Number</label>
+      <input required name="studentNumber" ng-model="register.studentNumber" ng-pattern="/(n|0)?[0-9]{7}/" />
+      <div ng-messages="registration.studentNumber.$error" role="alert">
+        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+          Please enter a valid QUT Student Number
         </div>
       </div>
-    </div>
+    </md-input-container>
 
-    <div class="row">
-      <button class="btn waves-effect waves-light" type="submit">{ Sign Me Up }</button>
-    </div>
-
+    <!-- Payment Method -->
+    <md-input-container>
+      <label>Payment Method</label>
+      <md-select required ng-model="register.payment.method">
+        <md-option ng-value="">Card</md-option>
+        <md-option ng-value="">Cash - </md-option>
+        <md-option ng-value="">Option One</md-option>
+        <md-option ng-value="">Option One</md-option>
+      </md-select>
+    </md-input-container>
   </form>
-</div>
+</md-content>

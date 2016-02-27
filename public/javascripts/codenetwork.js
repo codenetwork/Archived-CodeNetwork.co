@@ -1,4 +1,4 @@
-var app = angular.module('CodeNetwork', ['ngRoute', 'ngResource']);
+var app = angular.module('CodeNetwork', ['ngRoute', 'ngResource', 'ngMaterial', 'ngMessages']);
 
 // Angular Routes
 app.config(function($routeProvider){

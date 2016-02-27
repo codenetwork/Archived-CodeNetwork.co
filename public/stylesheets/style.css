@@ -1,9 +1,4 @@
-body {
-  background-color: #333334;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
+body {}
 
 main {
   flex: 1 0 auto;
@@ -23,5 +18,5 @@ main {
 }
 
 #card_details {
-  display: none;
+   display: none;
 }
