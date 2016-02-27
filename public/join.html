@@ -1,0 +1,73 @@
+<!--Membership Registration Form-->
+<div class="center container registration-form blue-grey lighten-5">
+  <h3>Join Code Network</h3>
+  <form class="col s12" id="membership-form" method="post">
+
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="name_first" type="text" class="validate">
+        <label for="name_first">First Name</label>
+      </div>
+      <div class="input-field col s6">
+        <input id="name_last" type="text" class="validate">
+        <label for="name_last">Last Name</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate">
+        <label for="email">Email</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input type="text" pattern="(n|0)?[0-9]{7}" id="student_number" class="validate"/>
+        <label for="student_number">Student Number</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <select id="payment_method" required material-select watch>
+          <option disabled value="payment_none" selected>Membership is $10 and optional - how would you like to pay?</option>
+          <option value="payment_card">Card</option>
+          <option value="payment_cash">Cash</option>
+          <option value="payment_code">Code</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="payment-errors"></div>
+
+    <div id="card_details">
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="number" id="card_number" data-stripe="number"/>
+          <label for="card_number">Card Number</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s4">
+          <input type="number" id="card_month" data-stripe="exp-month">
+          <label for="card_month">Month</label>
+        </div>
+        <div class="input-field col s4">
+          <input type="number" id="card_year" data-stripe="exp-year">
+          <label for="card_year">Year</label>
+        </div>
+        <div class="input-field col s4">
+          <input type="number" id="card_cvc" data-stripe="cvc">
+          <label for="card_cvc">CVC</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <button class="btn waves-effect waves-light" type="submit">{ Sign Me Up }</button>
+    </div>
+
+  </form>
+</div>

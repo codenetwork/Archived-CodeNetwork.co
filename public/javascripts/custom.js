@@ -1,7 +1,7 @@
 $(document).ready(function() {
     // Materialize Select Initialization
     $('select').material_select();
-    //$("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
+    $("select[required]").css({display: "inline", height: 0, padding: 0, width: 0});
 
     // Selecting the 'card' Payment Method displays the 'card_details' div.
     $('#payment_method').on('change', function() {
