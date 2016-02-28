@@ -1,6 +1,39 @@
-<div>
-  <!-- Code Network Logo-->
-  <img class="responsive-img" src="/images/final-grey-bg-large.png" width="15%"><br>
-
-  <a href="#/join">Join Code Network</a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      This is Code Network... Welcome!
+      <br><br>
+      <button ng-click="toggleModal('join')" class="btn btn-default">Open Join Modal</button>
+      <button ng-click="toggleModalOther()" class="btn btn-default">Open Other Modal</button>
+    </div>
+  </div>
 </div>
+
+
+
+
+
+
+<modal title="Join Code Network" visible="modal.join">
+
+</modal>
+
+
+
+
+
+
+
+<modal title="Example Modal" visible="modalOther">
+  <form role="form">
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password" />
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</modal>
