@@ -14,25 +14,93 @@
 
 
 
+
+
+
+
+
+
+
+<!-- Modal: Join Code Network -->
 <modal title="Join Code Network" visible="modal.join">
-  <p> This is the modal you are looking for! </p>
+  <form role="form" name="registration" ng-submit="join()">
+    <!-- Full Name | First Name and Last Name -->
+    <div class="row">
+      <!-- First Name -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name.first">First Name</label>
+          <input type="text" class="form-control" id="name.first" ng-model="user.name.first" placeholder="Placeholder Text..." />
+        </div>
+      </div>
+      <!-- Lase Name -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name.last">Last Name</label>
+          <input type="text" class="form-control" id="name.last" ng-model="user.name.last" placeholder="Placeholder Text..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- Email Address -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" class="form-control" id="email" ng-model="email" placeholder="Placeholder Text..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- Are you a Student? | Boolean controlls the display of Student Details section -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group"><label>Are you a Student?</label></div>
+      </div>
+      <div class="col-md-4">
+        <label class="radio-inline"><input type="radio" ng-model="student.status" data-ng-value="true" name="optradio">Yes</label>
+        <label class="radio-inline"><input type="radio" ng-model="student.status" data-ng-value="false" name="optradio" ng-checked="true">No</label>
+      </div>
+    </div>
+
+    <!-- Student Details | Institution and Student Number  -->
+    <div class="row" ng-show="student.status">
+      <!-- Institution -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="student.institution">Institution</label>
+          <select class="form-control" name="single" id="student.institution" ng-model="student.institution">
+            <option value="qut" ng-selected="true">Queensland University of Technology</option>
+            <option value="uq">University of Queensland</option>
+            <option value="other">Other Institution</option>
+          </select>
+        </div>
+      </div>
+      <!-- Student Number -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="student.number">Student Number</label>
+          <input type="text" class="form-control" id="student.number" ng-model="user.student.number" placeholder="Placeholder Text..." />
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
 </modal>
 
-
-
-
-
-
-
+<!-- Modal: Other Example Modal -->
 <modal title="Example Modal" visible="modal.other">
   <form role="form">
     <div class="form-group">
-      <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" />
+      <label for="grremail">Email address</label>
+      <input type="email" class="form-control" id="grremail" placeholder="Enter email" />
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Password" />
+      <label for="grrpassword">Password</label>
+      <input type="password" class="form-control" id="grrpassword" placeholder="Password" />
+      <label for="grr3password">Password</label>
+      <input type="password" class="form-control" id="grr3password" placeholder="Password" />
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>

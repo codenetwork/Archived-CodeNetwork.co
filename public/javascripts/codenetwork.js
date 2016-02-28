@@ -27,6 +27,13 @@ app.controller('mainController', function($scope, $http){
     (modal == 'join') ? $scope.modal.join = !$scope.modal.join : null;
     (modal == 'other') ? $scope.modal.other = !$scope.modal.other : null;
   }
+
+  $scope.join = function() {
+    console.log($scope);
+    console.log(this.user);
+    console.log('testing');
+
+  }
 });
 
 app.controller('authController', function($scope, $http){
