@@ -14,7 +14,10 @@ app.config(function($routeProvider){
 });
 
 app.controller('mainController', function($scope, $http){
-  // Main Controller...
+
+
+
+  // Registration Modal
 });
 
 app.controller('authController', function($scope, $http){
