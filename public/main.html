@@ -4,7 +4,7 @@
       This is Code Network... Welcome!
       <br><br>
       <button ng-click="toggleModal('join')" class="btn btn-default">Open Join Modal</button>
-      <button ng-click="toggleModalOther()" class="btn btn-default">Open Other Modal</button>
+      <button ng-click="toggleModal('other')" class="btn btn-default">Open Other Modal</button>
     </div>
   </div>
 </div>
@@ -15,7 +15,7 @@
 
 
 <modal title="Join Code Network" visible="modal.join">
-
+  <p> This is the modal you are looking for! </p>
 </modal>
 
 
@@ -24,7 +24,7 @@
 
 
 
-<modal title="Example Modal" visible="modalOther">
+<modal title="Example Modal" visible="modal.other">
   <form role="form">
     <div class="form-group">
       <label for="email">Email address</label>
