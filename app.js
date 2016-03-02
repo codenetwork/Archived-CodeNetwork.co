@@ -6,15 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config');
 
+var register = require('./routes/register.route.js');
+
 // Import, Configure and Initialize Mongoose.
 var mongoose = require('mongoose');
-require('./models/');
+require(__dirname + '/models/user.model.js');
 mongoose.connect(config.database.mongo.uri, function(error) {
   (error) ? console.log('Database Connection Error: ' + error) : console.log('Successfully Connected to MongoLab!');
 });
-
-//var routes = require('./routes/index');
-//var users = require('./routes/users');
 
 var app = express();
 
@@ -29,8 +28,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', routes);
-//app.use('/users', users);
+app.use('/join', register);
+//var payment = require('./routes/payment.route.js');
+//app.use('/payment', payment);
+
+//app.post('/join', function (req, res) {
+//  console.log('POST request to the join-page');
+//  res.send('POST request to the join-page');
+//});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
