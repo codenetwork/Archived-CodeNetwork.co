@@ -10,7 +10,6 @@ var register = require('./routes/register.route.js');
 
 // Import, Configure and Initialize Mongoose.
 var mongoose = require('mongoose');
-require(__dirname + '/models/user.model.js');
 mongoose.connect(config.database.mongo.uri, function(error) {
   (error) ? console.log('Database Connection Error: ' + error) : console.log('Successfully Connected to MongoLab!');
 });
