@@ -29,9 +29,11 @@ app.controller('mainController', function($scope, $http){
   }
 
   $scope.join = function() {
-    console.log($scope);
-    console.log(this.user);
-    console.log('testing');
+    console.log('Form Input: ' + JSON.stringify(this.user));
+
+    $http.post('/join', this.user).success(function(response) {
+      console.log(response);
+    });
 
   }
 });
