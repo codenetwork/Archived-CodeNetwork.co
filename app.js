@@ -14,6 +14,7 @@ mongoose.connect(config.database.mongo.uri, function(error) {
   (error) ? console.log('Database Connection Error: ' + error) : console.log('Successfully Connected to MongoLab!');
 });
 
+//Initialize Express App
 var app = express();
 
 // view engine setup
