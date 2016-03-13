@@ -1,0 +1,17 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+$LatoFamily: "Lato", Helvetica, Arial, sans-serif;
+$Consolas: "Lucida Console", Monaco, monospace;
+.jumbotron h1{
+  font-size: 300%;
+  background-color: transparent;
+  color: $creme;
+  font-family: $Consolas;
+}
+
+.console{
+  font-family: $Consolas;
+}
+
+.code-variable{
+  color: $green;
+}
