@@ -1,0 +1,49 @@
+script src="https://js.stripe.com/v1/"
+javascript:
+  Stripe.setPublishableKey('pk_test_tAWXaQrbEv8BxODkEur6u79Q');
+  $(document).ready(function () {
+    $("#payment-form").submit(function (event) {
+      // disable the submit button to prevent repeated clicks
+      $('.submit-button').attr("disabled", "disabled");
+      Stripe.createToken({
+        number: $('.card-number').val(),
+        cvc: $('.card-cvc').val(),
+        exp_month: $('.card-expiry-month').val(),
+        exp_year: $('.card-expiry-year').val()
+      }, stripeResponseHandler);
+      function stripeResponseHandler(status, response) {
+        if (response.error) {
+          alert("error");
+          // show the errors on the form
+          $(".payment-errors").text(response.error.message);
+          // re-enable the submit button after error
+          $('.submit-button').removeAttr('disabled');
+        } else {
+          var form$ = $("#payment-form");
+          // token contains id, last4, and card type
+          var token = response['id'];
+          // insert the token into the form so it gets submitted to the server
+          form$.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+          // and submit
+          form$.get(0).submit();
+        }
+      }
+
+      // prevent the form from submitting with the default action
+      return false;
+    });
+  });
+
+form action="pay" method="POST" id="payment-form"
+  div.form-row
+    label Amount
+    input name="amount" type="number" step="0.05" min="0.00" value="1.50"
+  div.form-row
+    label CVC
+    input type="text" size="4" autocomplete="off" class="card-cvc" value="123"
+  div.form-row
+    label Expiration (MM/YYYY)
+    input type="text" size="2" class="card-expiry-month" value="12"
+    span /
+    input type="text" size="4" class="card-expiry-year" value="2014"
+  button type="submit" class="submit-button" Submit Payment
