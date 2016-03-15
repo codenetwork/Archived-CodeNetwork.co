@@ -43,6 +43,8 @@ app.controller('authController', function($scope, $http){
 
 });
 
+
+// Directive: Modal
 app.directive('modal', function () {
   return {
     templateUrl: 'templates/directives/modal.html',
